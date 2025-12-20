@@ -1,5 +1,5 @@
 {
-  "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4&owner=only&count=100&output=atom",
+  "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4&owner=only&count=500&output=atom",
   "user_agent": "Mozilla/5.0 (compatible; InsiderMonitor/1.0; contact=sirimoky@gmail.com)",
-  "max_items_to_track": 300
+  "max_items_to_track": 500
 }
