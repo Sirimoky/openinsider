@@ -1,5 +1,5 @@
 {
-  "url": "https://openinsider.com/insider-purchases",
-  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36",
-  "max_rows_to_track": 300
+  "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4&owner=only&count=100&output=atom",
+  "user_agent": "Mozilla/5.0 (compatible; InsiderMonitor/1.0; contact=sirimoky@gmail.com)",
+  "max_items_to_track": 300
 }
