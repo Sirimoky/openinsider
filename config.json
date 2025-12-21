@@ -19,4 +19,7 @@
     "smtp_user": "simone.spina67@gmail.com",
     "to": "simone.spina67@gmail.com"
   }
+    "debug": {
+    "send_test_email": true
+  }
 }
