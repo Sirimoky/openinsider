@@ -15,7 +15,7 @@
     "enabled": true,
     "smtp_host": "smtp.gmail.com",
     "smtp_port": 587,
-    "smtp_user": "sirimoky@gmail.com",
+    "smtp_user": "simone.spina67@gmail.com",
     "to": "simone.spina67@gmail.com"
   }
 }
