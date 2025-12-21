@@ -29,12 +29,11 @@ jobs:
         run: |
           python monitor.py
 
-      - name: Commit state
+      - name: Commit state/history
         run: |
-          if [ -f state.json ]; then
-            git config user.name "github-actions"
-            git config user.email "github-actions@github.com"
-            git add state.json
-            git diff --cached --quiet || git commit -m "Update state"
-            git push
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add state.json history.jsonl || true
+          git diff --cached --quiet || git commit -m "Update state/history"
+          git push
           fi
