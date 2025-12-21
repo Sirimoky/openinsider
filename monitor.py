@@ -355,9 +355,11 @@ def main():
     "Accept-Encoding": "gzip, deflate, br",
     "Connection": "keep-alive"
 }
+    if not os.path.exists(HISTORY_PATH):
+        open(HISTORY_PATH, "a", encoding="utf-8").close()
 
-    state = load_json(STATE_PATH, {"seen_live_ids": [], "history_seen_filenames": []})
-
+     state = load_json(STATE_PATH, {"seen_live_ids": [], "history_seen_filenames": []})
+    
     bootstrap_history(cfg, headers, state)
     run_live(cfg, headers, state)
 
