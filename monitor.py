@@ -1,7 +1,8 @@
 import json
 import os
 import time
-from typing import Any, Dict, List, Optional
+import smtplib
+from email.message import EmailMessage
 import xml.etree.ElementTree as ET
 
 import requests
@@ -10,47 +11,34 @@ CONFIG_PATH = "config.json"
 STATE_PATH = "state.json"
 
 
-def load_json(path: str, default: Any) -> Any:
+def load_json(path, default):
     if not os.path.exists(path):
         return default
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
-def save_json(path: str, data: Any) -> None:
+def save_json(path, data):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
-def fetch_text(url: str, user_agent: str) -> str:
-    last_err = None
-    for attempt in range(1, 4):  # 3 tentativi
+def fetch_text(url, headers, retries=3, timeout=30):
+    last = None
+    for i in range(1, retries + 1):
         try:
-            r = requests.get(
-                url,
-                headers={
-                    "User-Agent": user_agent,
-                    "Accept": "application/atom+xml,application/xml,text/xml,*/*",
-                },
-                timeout=30,
-            )
+            r = requests.get(url, headers=headers, timeout=timeout)
             r.raise_for_status()
             return r.text
         except requests.RequestException as e:
-            last_err = e
-            print(f"Tentativo {attempt}/3 fallito: {e}")
-            time.sleep(3 * attempt)
-    raise RuntimeError(f"Impossibile raggiungere {url} dopo 3 tentativi: {last_err}")
+            last = e
+            print(f"Tentativo {i}/{retries} fallito: {e}")
+            time.sleep(2 * i)
+    raise RuntimeError(f"Impossibile scaricare {url}: {last}")
 
 
-def parse_sec_atom(atom_xml: str) -> List[Dict[str, str]]:
-    """
-    Parse minimale del feed Atom SEC "getcurrent" (Form 4).
-    Ritorna una lista di entry con id, title, updated, link.
-    """
+def parse_atom_entries(atom_xml):
     root = ET.fromstring(atom_xml)
-
-    # namespace Atom
     ns = {"atom": "http://www.w3.org/2005/Atom"}
 
     entries = []
@@ -65,53 +53,65 @@ def parse_sec_atom(atom_xml: str) -> List[Dict[str, str]]:
             link = link_el.attrib["href"].strip()
 
         if entry_id:
-            entries.append(
-                {"id": entry_id, "title": title, "updated": updated, "link": link}
-            )
-
+            entries.append({"id": entry_id, "title": title, "updated": updated, "link": link})
     return entries
+
+
+def send_email(cfg, subject, body):
+    email_cfg = cfg.get("email", {})
+    if not email_cfg.get("enabled", False):
+        return
+
+    smtp_pass = os.environ.get("SMTP_PASS")
+    if not smtp_pass:
+        raise RuntimeError("SMTP_PASS non presente (GitHub Secret mancante).")
+
+    msg = EmailMessage()
+    msg["Subject"] = subject
+    msg["From"] = email_cfg["smtp_user"]
+    msg["To"] = email_cfg["to"]
+    msg.set_content(body)
+
+    with smtplib.SMTP(email_cfg["smtp_host"], int(email_cfg["smtp_port"])) as server:
+        server.starttls()
+        server.login(email_cfg["smtp_user"], smtp_pass)
+        server.send_message(msg)
 
 
 def main():
     cfg = load_json(CONFIG_PATH, {})
-    url = cfg["url"]
-    ua = cfg.get("user_agent", "InsiderMonitor/1.0 (contact=example@example.com)")
-    max_items = int(cfg.get("max_items_to_track", 300))
+    sec_cfg = cfg.get("sec", {})
+    if "live_atom_url" not in sec_cfg:
+        raise RuntimeError("config.json: manca sec.live_atom_url")
 
-    # Stato: lista degli ultimi ID visti
-    state = load_json(STATE_PATH, {"seen_ids": []})
-    seen_ids = set(state.get("seen_ids", []))
+    headers = {
+        "User-Agent": sec_cfg.get("user_agent", "InsiderMonitor/1.0 (contact=example@example.com)"),
+        "Accept": "application/atom+xml,application/xml,text/xml,*/*",
+    }
 
-    print(f"Fetch ATOM: {url}")
-    try:
-        atom = fetch_text(url, ua)
-    except Exception as e:
-        print(f"ERRORE rete o sito non raggiungibile: {e}")
-        # usciamo puliti (workflow verde) e riproverà al prossimo giro
-        return
+    state = load_json(STATE_PATH, {"seen_live_ids": []})
+    seen = set(state.get("seen_live_ids", []))
 
-    entries = parse_sec_atom(atom)
-    if not entries:
-        print("Nessuna entry trovata nel feed (strano).")
-        return
+    atom_url = sec_cfg["live_atom_url"]
+    print(f"Fetch ATOM: {atom_url}")
+    atom = fetch_text(atom_url, headers=headers)
 
-    # Di solito il feed è già ordinato (nuovi prima). Manteniamo le prime N.
-    entries = entries[:max_items]
+    entries = parse_atom_entries(atom)
+    print(f"Entry lette: {len(entries)}")
 
+    new_entries = [e for e in entries if e["id"] not in seen]
+    print(f"Nuove: {len(new_entries)}")
+
+    # aggiorna stato (teniamo i 300 più recenti)
     ids_now = [e["id"] for e in entries]
-    new_entries = [e for e in entries if e["id"] not in seen_ids]
+    state["seen_live_ids"] = ids_now[:300]
+    save_json(STATE_PATH, state)
 
-    print(f"Entry lette: {len(entries)} | nuove: {len(new_entries)}")
+    # TEST EMAIL (disattivato): lo useremo dopo con la condizione
+    # if new_entries:
+    #     send_email(cfg, "Test alert", f"Nuove entry: {len(new_entries)}")
 
-    # Debug: stampa le prime 3 nuove
-    for e in new_entries[:3]:
-        print(f"NUOVO: {e['updated']} | {e['title']} | {e['link']}")
-
-    # Salva stato aggiornato (solo gli ultimi N)
-    save_json(STATE_PATH, {"seen_ids": ids_now})
-
-    # Qui, più avanti, applicheremo la condizione sulle new_entries
-    # e invieremo email se serve.
+    print("OK: state.json aggiornato.")
 
 
 if __name__ == "__main__":
