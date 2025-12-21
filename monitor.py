@@ -348,7 +348,7 @@ def main():
     if "sec" not in cfg or "live_atom_url" not in cfg["sec"]:
         raise RuntimeError("config.json non valido: manca sec.live_atom_url")
 
-   headers = {
+    headers = {
     "User-Agent": cfg["sec"].get("user_agent", "InsiderMonitor/1.0 (contact=example@example.com)"),
     "Accept": "application/xml,text/xml,application/atom+xml,text/plain,*/*",
     "Accept-Language": "en-US,en;q=0.9",
@@ -358,7 +358,7 @@ def main():
     if not os.path.exists(HISTORY_PATH):
         open(HISTORY_PATH, "a", encoding="utf-8").close()
 
-     state = load_json(STATE_PATH, {"seen_live_ids": [], "history_seen_filenames": []})
+    state = load_json(STATE_PATH, {"seen_live_ids": [], "history_seen_filenames": []})
     
     bootstrap_history(cfg, headers, state)
     run_live(cfg, headers, state)
