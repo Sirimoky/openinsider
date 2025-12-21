@@ -133,8 +133,10 @@ def bootstrap_history(cfg: dict, headers: Dict[str, str], state: dict) -> None:
 
         try:
             idx_text = fetch_text(url, headers=headers, retries=2, timeout=30)
+            time.sleep(0.25)
         except Exception as e:
             print(f"[history] Skip {d} (non disponibile): {e}")
+            time.sleep(0.25)
             continue
 
         rows = parse_master_idx(idx_text)
@@ -346,10 +348,13 @@ def main():
     if "sec" not in cfg or "live_atom_url" not in cfg["sec"]:
         raise RuntimeError("config.json non valido: manca sec.live_atom_url")
 
-    headers = {
-        "User-Agent": cfg["sec"].get("user_agent", "InsiderMonitor/1.0 (contact=example@example.com)"),
-        "Accept": "application/xml,text/xml,application/atom+xml,*/*",
-    }
+   headers = {
+    "User-Agent": cfg["sec"].get("user_agent", "InsiderMonitor/1.0 (contact=example@example.com)"),
+    "Accept": "application/xml,text/xml,application/atom+xml,text/plain,*/*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive"
+}
 
     state = load_json(STATE_PATH, {"seen_live_ids": [], "history_seen_filenames": []})
 
