@@ -2,7 +2,7 @@
   "sec": {
     "live_atom_url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4&owner=only&count=100&output=atom",
     "user_agent": "InsiderMonitor/1.0 (contact=simone.spina67@gmail.com)",
-    "history_days": 120,
+    "history_days": 30,
     "max_history_rows": 500000,
     "max_live_process_per_run": 20
   },
