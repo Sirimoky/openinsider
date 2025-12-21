@@ -425,6 +425,14 @@ def main():
     state.setdefault("bootstrap_done", False)
 
     ensure_history_file()
+        # Debug: invio email di test (una volta sola, poi disattivalo nel config)
+    if cfg.get("debug", {}).get("send_test_email", False):
+        try:
+            send_email(cfg, "[TEST] SEC monitor", "Email di test inviata correttamente da GitHub Actions.")
+            print("[email] Test email inviata.")
+        except Exception as e:
+            print(f"[email] ERRORE invio test email: {e}")
+            raise
 
     # Bootstrap SOLO una volta (come vuoi tu).
     if not state.get("bootstrap_done", False):
