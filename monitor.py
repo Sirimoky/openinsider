@@ -250,47 +250,40 @@ def find_filing_xml_url(filing_index_html: str) -> Optional[str]:
     return "https://www.sec.gov/" + href.lstrip("/")
 
 
-def parse_form4_xml(form4_xml: str) -> Dict[str, Any]:
+def parse_form4_xml(form4_xml: str) -> List[Dict[str, Any]]:
     root = ET.fromstring(form4_xml)
 
-    def find_text(path: str) -> str:
+    def t(path):
         el = root.find(path)
         return el.text.strip() if el is not None and el.text else ""
 
-    ticker = find_text(".//issuerTradingSymbol")
+    ticker = t(".//issuerTradingSymbol")
+    insider = t(".//reportingOwnerName")
+    title = t(".//officerTitle")
 
-    txs = []
-    total_value = 0.0
+    rows = []
 
     for tx in root.findall(".//nonDerivativeTransaction"):
-        code = ""
-        code_el = tx.find(".//transactionCoding/transactionCode")
-        if code_el is not None and code_el.text:
-            code = code_el.text.strip()
+        trade_date = t(".//transactionDate/value")
+        code = t(".//transactionCoding/transactionCode")
 
-        shares = 0.0
-        price = 0.0
+        qty = float(t(".//transactionShares/value") or 0)
+        price = float(t(".//transactionPricePerShare/value") or 0)
+        value = qty * price
 
-        shares_el = tx.find(".//transactionAmounts/transactionShares/value")
-        price_el = tx.find(".//transactionAmounts/transactionPricePerShare/value")
+        rows.append({
+            "trade_date": trade_date,
+            "ticker": ticker,
+            "insider_name": insider,
+            "title": title,
+            "trade_type": code,
+            "price": price,
+            "qty": qty,
+            "value": value
+        })
 
-        if shares_el is not None and shares_el.text:
-            try:
-                shares = float(shares_el.text.strip())
-            except ValueError:
-                shares = 0.0
+    return rows
 
-        if price_el is not None and price_el.text:
-            try:
-                price = float(price_el.text.strip())
-            except ValueError:
-                price = 0.0
-
-        value = shares * price
-        txs.append({"code": code, "shares": shares, "price": price, "value": value})
-        total_value += value
-
-    return {"ticker": ticker, "transactions": txs, "total_value_usd": total_value}
 
 
 def alert_condition(cfg: dict, filing_data: Dict[str, Any]) -> bool:
