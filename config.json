@@ -10,7 +10,7 @@
     "enabled": true,
     "tickers_whitelist": [],
     "transaction_code": "P",
-    "min_total_value_usd": 500000
+    "min_total_value_usd": 1
   },
   "email": {
     "enabled": true,
