@@ -1,5 +1,21 @@
 {
-  "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4&owner=only&count=500&output=atom",
-  "user_agent": "Mozilla/5.0 (compatible; InsiderMonitor/1.0; contact=sirimoky@gmail.com)",
-  "max_items_to_track": 500
+  "sec": {
+    "live_atom_url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=4&owner=only&count=100&output=atom",
+    "user_agent": "InsiderMonitor/1.0 (contact=simone.spina67@gmail.com)",
+    "history_days": 90,
+    "max_history_rows": 50000
+  },
+  "alert": {
+    "enabled": true,
+    "tickers_whitelist": [],
+    "transaction_code": "P",
+    "min_total_value_usd": 500000
+  },
+  "email": {
+    "enabled": true,
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": 587,
+    "smtp_user": "TUOACCOUNT@gmail.com",
+    "to": "simone.spina67@gmail.com"
+  }
 }
