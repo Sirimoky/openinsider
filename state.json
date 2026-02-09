@@ -102,6 +102,16 @@
     "urn:tag:sec.gov,2008:accession-number=0001005757-25-000022"
   ],
   "seen_live_ids": [
+    "urn:tag:sec.gov,2008:accession-number=0001435109-26-000030",
+    "urn:tag:sec.gov,2008:accession-number=0001437749-26-003405",
+    "urn:tag:sec.gov,2008:accession-number=0001435109-26-000029",
+    "urn:tag:sec.gov,2008:accession-number=0001437749-26-003403",
+    "urn:tag:sec.gov,2008:accession-number=0001435109-26-000028",
+    "urn:tag:sec.gov,2008:accession-number=0001193125-26-041988",
+    "urn:tag:sec.gov,2008:accession-number=0001193125-26-041987",
+    "urn:tag:sec.gov,2008:accession-number=0001193125-26-041986",
+    "urn:tag:sec.gov,2008:accession-number=0001437749-26-003400",
+    "urn:tag:sec.gov,2008:accession-number=0001225208-26-001496",
     "urn:tag:sec.gov,2008:accession-number=0002041385-26-000014",
     "urn:tag:sec.gov,2008:accession-number=0002041385-26-000013",
     "urn:tag:sec.gov,2008:accession-number=0002041385-26-000012",
@@ -139,17 +149,7 @@
     "urn:tag:sec.gov,2008:accession-number=0001861684-26-000002",
     "urn:tag:sec.gov,2008:accession-number=0001859453-26-000002",
     "urn:tag:sec.gov,2008:accession-number=0001872792-26-000002",
-    "urn:tag:sec.gov,2008:accession-number=0002108080-26-000002",
-    "urn:tag:sec.gov,2008:accession-number=0001819688-26-000002",
-    "urn:tag:sec.gov,2008:accession-number=0001733883-26-000002",
-    "urn:tag:sec.gov,2008:accession-number=0002006910-26-000002",
-    "urn:tag:sec.gov,2008:accession-number=0001193125-26-041608",
-    "urn:tag:sec.gov,2008:accession-number=0001509412-26-000003",
-    "urn:tag:sec.gov,2008:accession-number=0001829126-26-001084",
-    "urn:tag:sec.gov,2008:accession-number=0001193125-26-041601",
-    "urn:tag:sec.gov,2008:accession-number=0001829126-26-001083",
-    "urn:tag:sec.gov,2008:accession-number=0001829126-26-001082",
-    "urn:tag:sec.gov,2008:accession-number=0001829126-26-001081"
+    "urn:tag:sec.gov,2008:accession-number=0002108080-26-000002"
   ],
   "history_seen_filenames": [
     "edgar/data/1272732/0001193125-25-320882.txt",
