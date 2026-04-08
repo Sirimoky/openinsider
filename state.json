@@ -102,6 +102,19 @@
     "urn:tag:sec.gov,2008:accession-number=0001005757-25-000022"
   ],
   "seen_live_ids": [
+    "urn:tag:sec.gov,2008:accession-number=0001964142-26-000006",
+    "urn:tag:sec.gov,2008:accession-number=0000921895-26-000944",
+    "urn:tag:sec.gov,2008:accession-number=0001499505-26-000039",
+    "urn:tag:sec.gov,2008:accession-number=0001435109-26-000070",
+    "urn:tag:sec.gov,2008:accession-number=0001840706-26-000110",
+    "urn:tag:sec.gov,2008:accession-number=0001840706-26-000109",
+    "urn:tag:sec.gov,2008:accession-number=0001840706-26-000108",
+    "urn:tag:sec.gov,2008:accession-number=0001840706-26-000107",
+    "urn:tag:sec.gov,2008:accession-number=0001840706-26-000106",
+    "urn:tag:sec.gov,2008:accession-number=0001840706-26-000105",
+    "urn:tag:sec.gov,2008:accession-number=0001840706-26-000104",
+    "urn:tag:sec.gov,2008:accession-number=0001840706-26-000103",
+    "urn:tag:sec.gov,2008:accession-number=0001840706-26-000102",
     "urn:tag:sec.gov,2008:accession-number=0001079973-26-000451",
     "urn:tag:sec.gov,2008:accession-number=0001193125-26-146316",
     "urn:tag:sec.gov,2008:accession-number=0001493152-26-015630",
@@ -135,15 +148,7 @@
     "urn:tag:sec.gov,2008:accession-number=0001437749-26-011668",
     "urn:tag:sec.gov,2008:accession-number=0001437749-26-011667",
     "urn:tag:sec.gov,2008:accession-number=0001408939-26-000003",
-    "urn:tag:sec.gov,2008:accession-number=0001140361-26-013723",
-    "urn:tag:sec.gov,2008:accession-number=0001437749-26-011666",
-    "urn:tag:sec.gov,2008:accession-number=0001437749-26-011665",
-    "urn:tag:sec.gov,2008:accession-number=0001437749-26-011664",
-    "urn:tag:sec.gov,2008:accession-number=0001437749-26-011663",
-    "urn:tag:sec.gov,2008:accession-number=0001437749-26-011662",
-    "urn:tag:sec.gov,2008:accession-number=0001437749-26-011661",
-    "urn:tag:sec.gov,2008:accession-number=0001437749-26-011660",
-    "urn:tag:sec.gov,2008:accession-number=0001437749-26-011659"
+    "urn:tag:sec.gov,2008:accession-number=0001140361-26-013723"
   ],
   "history_seen_filenames": [
     "edgar/data/1272732/0001193125-25-320882.txt",
