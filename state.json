@@ -102,6 +102,9 @@
     "urn:tag:sec.gov,2008:accession-number=0001005757-25-000022"
   ],
   "seen_live_ids": [
+    "urn:tag:sec.gov,2008:accession-number=0000310354-26-000024",
+    "urn:tag:sec.gov,2008:accession-number=0002111248-26-000001",
+    "urn:tag:sec.gov,2008:accession-number=0001959455-26-000061",
     "urn:tag:sec.gov,2008:accession-number=0001178913-26-002055",
     "urn:tag:sec.gov,2008:accession-number=0001178913-26-002053",
     "urn:tag:sec.gov,2008:accession-number=0001178913-26-002051",
@@ -146,10 +149,7 @@
     "urn:tag:sec.gov,2008:accession-number=0001824290-26-000014",
     "urn:tag:sec.gov,2008:accession-number=0001717500-26-000014",
     "urn:tag:sec.gov,2008:accession-number=0001560810-26-000011",
-    "urn:tag:sec.gov,2008:accession-number=0001193125-26-150019",
-    "urn:tag:sec.gov,2008:accession-number=0001104659-26-041635",
-    "urn:tag:sec.gov,2008:accession-number=0001104659-26-041634",
-    "urn:tag:sec.gov,2008:accession-number=0001470831-26-000355"
+    "urn:tag:sec.gov,2008:accession-number=0001193125-26-150019"
   ],
   "history_seen_filenames": [
     "edgar/data/1272732/0001193125-25-320882.txt",
