@@ -102,6 +102,16 @@
     "urn:tag:sec.gov,2008:accession-number=0001005757-25-000022"
   ],
   "seen_live_ids": [
+    "urn:tag:sec.gov,2008:accession-number=0001193125-26-365982",
+    "urn:tag:sec.gov,2008:accession-number=0001236030-26-000008",
+    "urn:tag:sec.gov,2008:accession-number=0001628280-26-058994",
+    "urn:tag:sec.gov,2008:accession-number=0001704635-26-000010",
+    "urn:tag:sec.gov,2008:accession-number=0001193125-26-365940",
+    "urn:tag:sec.gov,2008:accession-number=0001976408-26-000772",
+    "urn:tag:sec.gov,2008:accession-number=0001976408-26-000771",
+    "urn:tag:sec.gov,2008:accession-number=0001976408-26-000770",
+    "urn:tag:sec.gov,2008:accession-number=0001878313-26-000079",
+    "urn:tag:sec.gov,2008:accession-number=0001493152-26-040164",
     "urn:tag:sec.gov,2008:accession-number=0001861996-26-000006",
     "urn:tag:sec.gov,2008:accession-number=0002093121-26-000004",
     "urn:tag:sec.gov,2008:accession-number=0001213900-26-093704",
@@ -141,15 +151,7 @@
     "urn:tag:sec.gov,2008:accession-number=0001628280-26-058970",
     "urn:tag:sec.gov,2008:accession-number=0001772144-26-000002",
     "urn:tag:sec.gov,2008:accession-number=0001567929-26-000008",
-    "urn:tag:sec.gov,2008:accession-number=0001231919-26-001100",
-    "urn:tag:sec.gov,2008:accession-number=0002087850-26-000008",
-    "urn:tag:sec.gov,2008:accession-number=0001964789-26-000038",
-    "urn:tag:sec.gov,2008:accession-number=0001140361-26-034358",
-    "urn:tag:sec.gov,2008:accession-number=0001086618-26-000007",
-    "urn:tag:sec.gov,2008:accession-number=0001453018-26-000007",
-    "urn:tag:sec.gov,2008:accession-number=0001397829-26-000007",
-    "urn:tag:sec.gov,2008:accession-number=0001628280-26-058969",
-    "urn:tag:sec.gov,2008:accession-number=0001493152-26-040135"
+    "urn:tag:sec.gov,2008:accession-number=0001231919-26-001100"
   ],
   "history_seen_filenames": [
     "edgar/data/1272732/0001193125-25-320882.txt",
